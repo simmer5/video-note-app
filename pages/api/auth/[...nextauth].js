@@ -19,7 +19,7 @@ export const authOptions = {
 			async authorize(credentials, req) {
 				const { email, password, csrfToken } = credentials
 
-				const user = await prisma.users_tb.findFirst({
+				const user = await prisma.User_tb.findFirst({
 					where: { email: `${email}` },
 				})
 

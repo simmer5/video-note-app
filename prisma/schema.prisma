@@ -8,9 +8,59 @@ datasource db {
   relationMode = "prisma"
 }
 
-model users_tb {
-  id       Int     @id @default(autoincrement())
-  email    String  @db.VarChar(255)
-  password String  @db.VarChar(255)
-  role     String? @default("USER") @db.VarChar(50)
+// model Users_tb {
+//   id       Int     @id @default(autoincrement())
+//   email    String  @db.VarChar(255) @unique
+//   password String  @db.VarChar(255)
+//   role     String? @default("USER") @db.VarChar(50)
+//   UserNotes User_notes_tb[]
+// }
+
+// model User_notes_tb {
+//   id Int @id @default(autoincrement())
+//   userId Int @unique
+//   user Users_tb @relation(fields: [userId], references: [id])
+//   videoUrl String @db.VarChar(255)
+//   description String @db.Text
+//   title String @db.VarChar(255)
+//   timeStamp Int @db.Int 
+//   created DateTime @db.DateTime() @default(now())
+//   tags Tags_tb[]
+
+// }
+// model Tags_tb{
+//   id Int @id @default(autoincrement())
+//   tag String @db.VarChar(255)
+//   UserNotes User_notes_tb[]
+// }
+
+model Note_tb {
+  noteId        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String   
+  comment   String?
+  url String
+  tags Tag_tb[]
+  userId Int
+  user User_tb @relation(fields: [userId], references: [userId])
+}
+
+
+model Tag_tb{
+  id Int @id @default(autoincrement())
+  tag String 
+  noteId Int
+  notes Note_tb @relation(fields: [noteId], references: [noteId])
+
+}
+
+model User_tb {
+  userId Int      @id @default(autoincrement())
+  email   String   @unique
+  password String
+  createdAt DateTime @default(now())
+  role     String? @default("USER") 
+  notes   Note_tb[]
+  
 }
