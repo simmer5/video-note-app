@@ -2,12 +2,15 @@ import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography'
 import Title from '../Title'
 import CardMedia from '@mui/material/CardMedia'
+import Stack from '@mui/material/Stack'
+import TagChip from '../TagChip'
 
 const NoteCard = ({
 	title,
 	date = new Date().toLocaleDateString(),
 	comment,
 	timeStamp = 0,
+	tag,
 }) => {
 	function preventDefault(event) {
 		event.preventDefault()
@@ -34,6 +37,9 @@ const NoteCard = ({
 			<Typography color='text.secondary' sx={{ flex: 1 }}>
 				{date}
 			</Typography>
+			<Stack direction='row' spacing={1}>
+				<TagChip tag={tag} />
+			</Stack>
 		</>
 	)
 }

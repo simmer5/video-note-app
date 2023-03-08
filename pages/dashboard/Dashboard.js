@@ -27,6 +27,7 @@ import { mainListItems, secondaryListItems } from '../../components/listItems'
 import Deposits from '../../components/Deposits'
 import Orders from '../../components/Orders'
 import NoteCard from '@/components/NoteCard'
+import AddNewModal from '@/components/AddNewModal'
 
 function Copyright(props) {
 	return (
@@ -94,6 +95,7 @@ const Drawer = styled(MuiDrawer, {
 
 function DashboardContent() {
 	const [open, setOpen] = React.useState(true)
+	const [openModal, setOpenModal] = React.useState(false)
 	const toggleDrawer = () => {
 		setOpen(!open)
 	}
@@ -103,6 +105,13 @@ function DashboardContent() {
 	useEffect(() => {
 		if (session.status === 'unauthenticated') Router.replace('/signin')
 	}, [session.status])
+
+	const openAddNewModal = () => {
+		setOpenModal(true)
+	}
+	const closeAddNewModal = () => {
+		setOpenModal(false)
+	}
 
 	if (session.status === 'authenticated') {
 		return (
@@ -179,10 +188,11 @@ function DashboardContent() {
 						}}
 					>
 						<Toolbar />
+						<Button variant='outlined' onClick={openAddNewModal}>
+							Add new
+						</Button>
 						<Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
 							<Grid container spacing={3}>
-								{/* Chart */}
-
 								{/* Recent Deposits */}
 								<Grid item xs={12} md={6} lg={4}>
 									<Paper
@@ -202,17 +212,22 @@ function DashboardContent() {
 											p: 2,
 											display: 'flex',
 											flexDirection: 'column',
-											height: 'auto',
+											height: 'n',
 										}}
 									>
 										<NoteCard
 											title={'Note title'}
 											comment={'Video komentaras'}
 											timeStamp={'2:00'}
+											tag='Next.js'
 										/>
 									</Paper>
 								</Grid>
 							</Grid>
+							<AddNewModal
+								openModal={openModal}
+								closeAddNewModal={closeAddNewModal}
+							/>
 							<Copyright sx={{ pt: 4 }} />
 						</Container>
 					</Box>
