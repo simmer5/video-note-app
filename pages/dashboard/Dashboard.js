@@ -28,6 +28,7 @@ import Deposits from '../../components/Deposits'
 import Orders from '../../components/Orders'
 import NoteCard from '@/components/NoteCard'
 import AddNewModal from '@/components/AddNewModal'
+import AddNoteForm from '@/components/AddNewNoteForm'
 
 function Copyright(props) {
 	return (
@@ -227,7 +228,9 @@ function DashboardContent() {
 							<AddNewModal
 								openModal={openModal}
 								closeAddNewModal={closeAddNewModal}
-							/>
+							>
+								<AddNoteForm />
+							</AddNewModal>
 							<Copyright sx={{ pt: 4 }} />
 						</Container>
 					</Box>
