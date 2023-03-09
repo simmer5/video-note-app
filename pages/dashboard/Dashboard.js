@@ -25,10 +25,9 @@ import Button from '@mui/material/Button'
 import { mainListItems, secondaryListItems } from '../../components/listItems'
 
 import Deposits from '../../components/Deposits'
-import Orders from '../../components/Orders'
+
 import NoteCard from '@/components/NoteCard'
 import AddNewModal from '@/components/AddNewModal'
-import AddNoteForm from '@/components/AddNewNoteForm'
 
 function Copyright(props) {
 	return (
@@ -95,7 +94,7 @@ const Drawer = styled(MuiDrawer, {
 }))
 
 function DashboardContent() {
-	const [open, setOpen] = React.useState(true)
+	const [open, setOpen] = React.useState(false)
 	const [openModal, setOpenModal] = React.useState(false)
 	const toggleDrawer = () => {
 		setOpen(!open)
@@ -228,9 +227,8 @@ function DashboardContent() {
 							<AddNewModal
 								openModal={openModal}
 								closeAddNewModal={closeAddNewModal}
-							>
-								<AddNoteForm />
-							</AddNewModal>
+							/>
+
 							<Copyright sx={{ pt: 4 }} />
 						</Container>
 					</Box>
